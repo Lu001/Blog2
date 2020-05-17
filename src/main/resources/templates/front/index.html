@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title>基于SpringBoot个人爱好分享与交流</title>
+</head>
+
+
+<body id="body" class="fix-padding">
+
+<div id="alllayout" class="app app-aside-fix container app-header-fixed ">
+    <div th:replace="front/layout/header"></div>
+
+    <!--left-->
+    <div th:replace="front/layout/left"></div>
+    <!--/left-->
+
+    <!--content -->
+    <div id="content" class="app-content">
+        <!--loading animate-->
+        <div id="loading" class="butterbar active hide">
+            <span class="bar"></span>
+        </div>  <!-- / aside -->
+
+        <!-- <div id="content" class="app-content"> -->
+        <a class="off-screen-toggle hide"></a>
+        <main class="app-content-body animated fadeIn">
+            <div class="hbox hbox-auto-xs hbox-auto-sm">
+
+                <div  class="col center-part">
+                    <header class="bg-light lter wrapper-md">
+                        <h1 class="m-n font-thin text-black l-h">清音阁</h1>
+                        <small class="text-muted letterspacing indexWords">能马上实现的希望催人行动起来，不能马上实现的希望则像麻醉剂一样起着安神的作用。--霍弗</small>
+                    </header>
+                    <div class="wrapper-md" id="post-panel">
+
+                        <!--首页输出文章-->
+                        <div class="blog-post">
+
+                            <div class="single-post panel" th:each="row : ${list.rows}">
+                                <div class="index-post-img">
+                                    <a th:href="'/article/' + ${row.id}">
+                                        <!--图片-->
+                                        <img height="400px" th:src="${row.cover}" class="img-full lazy"></a></div>
+                                <div class="post-meta wrapper-lg">
+                                    <!--标题-->
+                                    <h2
+                                            class="m-t-none text-e
+                                        llipsis index-post-title text-title">
+                                        <a th:href="'/article/' + ${row.id}" th:text="${row.title}">
+                                        </a>
+                                    </h2>
+                                    <!--文章内容简介-->
+                                    <p th:text="${row.content}"></p>
+                                    <div class="line line-lg b-b b-light"></div>
+                                    <div class="text-muted post-item-foot-icon text-ellipsis list-inline">
+                                        <li>
+                                            <span class="m-r-sm right-small-icons"><i data-feather="user"></i>
+                                            </span>
+                                            <!--作者-->
+                                            <a href="#" th:text="${row.author}"></a></li>
+
+                                        <li>
+                                            <!--发布日期-->
+                                            <span class="right-small-icons m-r-sm">
+                                                <i data-feather="clock">
+
+                                                </i>
+                                            </span>
+
+                                        </li>
+                                        <!--评论-->
+                                        <li>
+                                            <span class="right-small-icons m-r-sm"><i data-feather="message-square"></i></span><a
+                                                href="detailArticle.html#comments">2 条评论</a>
+                                        </li>
+                                    </div>
+                                    <!--text-muted-->
+                                </div><!--post-meta wrapper-lg-->
+                            </div><!--panel/panel-small-->
+
+                        </div>          <!--分页首页按钮-->
+                        <nav class="text-center m-t-lg m-b-lg" role="navigation">
+                            <ol class="page-navigator">
+                                <li th:if="${list.current} > 1" class="prev">
+                                    <a th:href="'/test/' + (${list.current} - 1)">←</a>
+                                </li>
+                                <li th:each="i : ${#numbers.sequence(1, list.pages)}"
+                                    th:class="${list.current} == ${i} ? 'current' : ''">
+                                    <a th:href="'/test/' + ${i}">[[${i}]]</a>
+                                </li>
+                                <li th:if="${list.current} < ${list.pages}" class="next">
+                                    <a th:href="'/test/' + (${list.current} + 1)">→</a>
+                                </li>
+                            </ol>
+                        </nav>
+
+
+                        <style>
+                            .page-navigator > li > a, .page-navigator > li > span {
+                                line-height: 1.42857143;
+                                padding: 6px 12px;
+                            }
+                        </style>
+                    </div>
+                </div>
+
+                <!--首页右侧栏-->
+                <div th:replace="front/layout/right"></div>
+            </div>
+        </main>
+    </div>
+    <!--/content -->
+
+    <!-- footer -->
+    <div th:replace="front/layout/footer"></div>
+
+</div>
+
+
+</body>
+
+
+</html>
+
+
+
+

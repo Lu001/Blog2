@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title>基于SpringBoot个人爱好分享与交流</title>
+
+</head>
+
+
+<body id="body" class="fix-padding">
+
+<div id="alllayout" class="app app-aside-fix container app-header-fixed ">
+    <div th:replace="front/layout/header"></div>
+    <link rel="stylesheet" data-th-href="@{/front/robot/style.css}">
+    <!--left-->
+    <div th:replace="front/layout/left"></div>
+    <!--/left-->
+    <main class="app-content-body animated fadeIn">
+        <div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!--content -->
+    <div id="content" class="app-content">
+        <div class="chat">
+            <div class="chat-header clearfix">
+                <img width="60px" height="60px" src="http://qa78a1o1p.bkt.clouddn.com/1589256585763.jpg" alt="avatar" />
+                <div class="chat-about">
+                    <div class="chat-with">特朗普</div>
+                    <div class="chat-num-messages">没有人比我更懂如何做网站</div>
+                </div>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="chat-history">
+                <ul>
+                    <li class="clearfix">
+                        <div class="message-data align-right">
+                            <span class="message-data-time">10:10 AM, 今天</span> &nbsp; &nbsp;
+                            <span class="message-data-name">偷看星星</span> <i class="fa fa-circle me"></i>
+                        </div>
+                        <div class="message other-message float-right">
+                            你好，特朗普..请问如何实现一个网站？
+                        </div>
+                    </li>
+                    <li>
+                        <div class="message-data">
+                            <span class="message-data-name"><i class="fa fa-circle online"></i> 特朗普</span>
+                            <span class="message-data-time">10:12 AM, Today</span>
+                        </div>
+                        <div class="message my-message">
+                            泻药，人在美国，刚下飞机。。网站还不好实现？
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="message-data align-right">
+                            <span class="message-data-time">10:14 AM, 今天</span> &nbsp; &nbsp;
+                            <span class="message-data-name">偷看星星</span> <i class="fa fa-circle me"></i>
+                        </div>
+                        <div class="message other-message float-right">
+                            你倒是给我说说看
+                        </div>
+                    </li>
+                    <li>
+                        <div class="message-data">
+                            <span class="message-data-name"><i class="fa fa-circle online"></i> 特朗普</span>
+                            <span class="message-data-time">10:20 AM, 今天</span>
+                        </div>
+                        <div class="message my-message">
+                            Get Out！ 你还有啥问题不？
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="chat-message clearfix">
+                <textarea name="message-to-send" id="message-to-send" placeholder="请文明用语！" rows="3"></textarea>
+                <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+                <i class="fa fa-file-image-o"></i>
+                <button>发送</button>
+            </div>
+        </div>
+    </div>
+            <div th:replace="front/layout/right"></div>
+        </div>
+    <!--/content -->
+    </main>
+    <!-- footer -->
+    <div th:replace="front/layout/footer"></div>
+
+</div>
+
+<script id="message-template" type="text/x-handlebars-template">
+    <li class="clearfix">
+        <div class="message-data align-right">
+            <span class="message-data-time" >{{time}}, 今天</span> &nbsp; &nbsp;
+            <span class="message-data-name" >偷看星星</span> <i class="fa fa-circle me"></i>
+        </div>
+        <div class="message other-message float-right">
+            {{messageOutput}}
+        </div>
+    </li>
+</script>
+<script id="message-response-template" type="text/x-handlebars-template">
+    <li>
+        <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> 亲爱的用户</span>
+            <span class="message-data-time">{{time}}, 今天</span>
+        </div>
+        <div class="message my-message">
+            {{response}}
+        </div>
+    </li>
+</script>
+
+<script th:src="@{/front/robot/jquery-1.10.2.js}"></script>
+<script th:src='@{/front/robot/handlebars.min.js}'></script>
+<script th:src='@{/front/robot/list.min.js}'></script>
+<script th:src="@{/front/robot/script.js}"></script>
+</body>
+
+
+</html>
+
+
+
+

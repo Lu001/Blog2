@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title>基于SpringBoot个人爱好分享与交流</title>
+</head>
+
+
+<body id="body" class="fix-padding">
+
+<div id="alllayout" class="app app-aside-fix container app-header-fixed ">
+    <div th:replace="front/layout/header"></div>
+
+    <!--left-->
+    <div th:replace="front/layout/left"></div>
+    <!--/left-->
+
+    <!-- content -->
+    <div id="content" class="app-content">
+        <!--loading animate-->
+        <div id="loading" class="butterbar active hide">
+            <span class="bar"></span>
+        </div>    <!-- / aside -->
+        <!-- <div id="content" class="app-content"> -->
+        <a class="off-screen-toggle hide"></a>
+        <main class="app-content-body animated fadeIn">
+            <div class="hbox hbox-auto-xs hbox-auto-sm">
+                <!--文章-->
+                <div class="col center-part">
+                    <!--生成分享图片必须的HTML结构-->
+                    <style>
+
+                        .mdx-si-head .cover {
+                            object-fit: cover;
+                            width: 100%;
+                            height: 100%
+                        }
+
+                    </style>
+                    <div class="mdx-share-img" id="mdx-share-img">
+                        <div class="mdx-si-head" style="background-image:url(static/image/video.jpg)"><p>Mr. Zheng</p>
+                            <span>解决 npm 安装 node-sass 速度慢的问题</span></div>
+                        <div class="mdx-si-sum">可通过配置淘宝的镜像源解决，首先配置淘宝的镜像源npm config set registry https://r...</div>
+                        <div class="mdx-si-box"><span>扫描右侧二维码阅读全文</span>
+                            <div class="mdx-si-qr" id="mdx-si-qr"><img
+                                    src="static/picture/GetCode-url_httpswww.ydyno.comar.jpg"></div>
+                        </div>
+                        <div class="mdx-si-time">20<br><span class="mdx-si-time-2">2020/02</span></div>
+                    </div>    <!--标题下的一排功能信息图标：作者/时间/浏览次数/评论数/分类-->
+
+                    <header id="small_widgets" class="bg-light lter wrapper-md">
+                        <h1 class="entry-title m-n font-thin text-black l-h">
+                            [[${p.title}]]
+                            <a class="plus-font-size" data-toggle="tooltip" data-original-title="点击改变文章字体大小"><i
+                                    data-feather="type"></i></a>
+                            <a data-morphing="" id="morphing" data-src="#morphing-content" href="javascript:;"
+                               class="read_mode superscript m-l-sm"
+                               data-toggle="tooltip" data-placement="right"
+                               data-original-title="阅读模式"><i
+                                    data-feather="book-open"></i></a></h1>       <!--文章标题下面的小部件-->
+                        <ul class="entry-meta text-muted list-inline m-b-none small
+             post-head-icon">
+                            <!--作者-->
+                            <li class="meta-author"><span class="post-icons"><i data-feather="user"></i></span><span
+                                    class="sr-only">博主：</span> <a class="meta-value" href="index8.html" rel="author">
+                                [[${p.author}]]</a></li>
+                            <!--发布时间-->
+                            <li class="meta-date"><span class="post-icons"><i data-feather="clock"></i></span><span
+                                    class="sr-only">发布时间：</span>
+                                <time class="meta-value">[[${p.publishTime}]]</time>
+                            </li>
+                            <!--浏览数-->
+                            <li class="meta-views"><span class="post-icons"><i data-feather="eye"></i></span><span
+                                    class="meta-value">1次浏览</span></li>
+                            <!--评论数-->
+                            <li class="meta-comments"><span class="post-icons"><i
+                                    data-feather="message-circle"></i></span><a class="meta-value" href="#comments">
+                                条评论</a></li>
+
+                            <!--文字数目-->
+                            <li class="meta-word"><span class="post-icons"><i data-feather="pen-tool"></i></span><span
+                                    class="meta-value">338字数</span></li>
+                            <!--分类-->
+                            <li class="meta-categories"><span class="post-icons"><i data-feather="hash"></i></span><span
+                                    class="sr-only">分类：</span> <span class="meta-value"><a
+                                    href="＃">[[${p.category}]]</a></span></li>
+                        </ul>
+                    </header>
+                    <div class="wrapper-md" id="post-panel">
+                        <ol th:if="${p.tags} != null" 　class="breadcrumb bg-white-pure" itemscope="">
+                            <li th:each="tag : ${p.tags}">[[${tag.name}]]</li>
+
+                            <!--<div style="float:right;">
+                                分享到：
+                                <style>
+                                    .breadcrumb i.iconfont.icon-qzone:after {
+                                        padding: 0 0 0 5px;
+                                        color: #ccc;
+                                        content: "/\00a0";
+                                    }
+
+                                    .breadcrumb i.fontello.fontello-weibo:after {
+                                        padding: 0 5px 0 5px;
+                                        color: #ccc;
+                                        content: "/\00a0";
+                                    }
+                                </style>
+                                <a href="javascript:;" itemprop="breadcrumb" target="_blank" title=""
+                                   data-toggle="tooltip" data-original-title="分享到QQ空间"
+                                   onclick="window.open(this.href, 'qzone-share', 'width=550,height=335');return false;"><i
+                                        style="font-size:15px;" class="iconfont icon-qzone" aria-hidden="true"></i></a>
+                                <a href="javascript:;" target="_blank" itemprop="breadcrumb" title=""
+                                   data-toggle="tooltip" data-original-title="分享到微博"
+                                   onclick="window.open(this.href, 'weibo-share', 'width=550,height=335');return false;"><i
+                                        style="font-size:15px;" class="fontello fontello-weibo" aria-hidden="true"></i></a>
+                                <a id="generateShareImg" itemprop="breadcrumb" title="" data-toggle="tooltip"
+                                   data-original-title="生成分享图"><i style="font-size:13px;"
+                                                                  class="fontello fontello-camera"
+                                                                  aria-hidden="true"></i></a></div>-->
+                        </ol>
+                        <!--博客文章样式 begin with .blog-post-->
+                        <div id="postpage" class="blog-post">
+                            <article class="single-post panel">
+                                <!--文章页面的头图-->
+                                <!--文章内容-->
+                                <div id="post-content" class="wrapper-lg">
+                                    <div class="entry-content l-h-2x">
+                                        <p th:utext="${p.content}"></p>
+                                        <!--文章的页脚部件：打赏和其他信息的输出-->
+                                        <div class="show-foot">
+                                            <div class="notebook">
+                                                <i class="fontello fontello-clock-o"></i>
+                                                <span>最后修改：[[${p.editTime}]]</span>
+                                            </div>
+                                            <div class="copyright" data-toggle="tooltip" data-html="true"
+                                                 data-original-title="转载请保留本文转载地址，著作权归作者所有"><span>© 允许规范转载</span>
+                                            </div>
+                                        </div>
+                                        <!--/文章的页脚部件：打赏和其他信息的输出-->
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <!--上一篇&下一篇-->
+                        <nav class="m-t-lg m-b-lg">
+                            <ul class="pager">
+                                <li class="next"><a class="box-shadow-wrap-normal" href=""
+                                                    data-toggle="tooltip">
+                                    下一篇 </a></li>
+                            </ul>
+                        </nav>
+                        <!--评论-->
+                        <div th:replace="front/layout/comment"></div>
+                    </div>
+                </div>
+                <!--文章右侧边栏开始-->
+                <div th:replace="front/layout/right"></div>
+                <!--文章右侧边栏结束-->
+            </div>
+        </main>
+
+
+        <div id="morphing-content" class="hidden read_mode_article">
+            <div class="page">
+                <h1 class="title">[[${p.title}]]</h1>
+                <div class="metadata singleline"><a href="#" rel="author" class="byline">[[${p.author}]]</a>&nbsp;•&nbsp;<span
+                        class="delimiter"></span>
+                    <time class="date">2020 年 02 月 20 日</time>
+                </div>
+                <p th:utext="${p.content}"></p>
+            </div>
+        </div>
+    </div>
+    <!-- /content -->
+    <script>
+        $.ajax()
+    </script>
+
+    <script th:src="@{/site/js/article.js}"></script>
+    <!-- footer -->
+    <div th:replace="front/layout/footer"></div>
+
+</div>
+
+
+</body>
+
+
+</html>
+
+
+
+

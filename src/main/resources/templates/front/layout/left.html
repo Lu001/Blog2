@@ -1,0 +1,157 @@
+<aside id="aside" class="app-aside hidden-xs bg-white">  <!--<aside>-->
+    <div class="aside-wrap" layout="column">
+        <div class="navi-wrap scroll-y scroll-hide" flex="">
+            <!-- user -->
+            <div class="clearfix hidden-xs text-center hide  show" id="aside-user">
+                <div class="dropdown wrapper vertical-wrapper">
+                    <div ui-nav="">
+                        <a href="cross.html">
+                            <span class="thumb-lg w-auto-folded avatar m-t-sm  vertical-avatar">
+                  <img src="http://qa78a1o1p.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720200515112704.jpg"
+                       class="img-full img-circle normal-shadow">
+                </span>
+                        </a>
+                    </div>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle hidden-folded  vertical-flex">
+                <span class="clear">
+                  <span class="block m-t-sm">
+                    <strong class="font-bold text-lt">偷看星星</strong>
+                    <b class="caret"></b>
+                  </span>
+                  <span class="text-muted text-xs block">时间乃是最大的革新家</span>
+                </span>
+                    </a>
+                    <!-- dropdown -->
+                    <ul class="dropdown-menu animated fadeInRight w hidden-folded no-padder">
+                        <li class="wrapper b-b m-b-sm bg-info m-n">
+                            <span class="arrow top hidden-folded arrow-info"></span>
+                            <div>
+                                <p>下午好，喝一点下午茶休息一下</p>
+                            </div>
+                            <div class="progress progress-xs m-b-none dker">
+                                <div class="progress-bar bg-white" data-toggle="tooltip"
+                                     data-original-title="时间已经度过29.17%" style="width: 29.17%"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- / dropdown -->
+                </div>
+            </div>
+            <!-- / user -->
+
+            <!-- nav -->
+            <nav ui-nav="" class="navi clearfix">
+                <ul class="nav">
+                    <!--index-->
+                    <div class="line dk hidden-folded"></div>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span>导航</span>
+                    </li>
+                    <!--主页-->
+                    <li>
+                        <a href="http://localhost:8080/test" class="auto">
+                            <span class="nav-icon"><i data-feather="home"></i></span>
+                            <span>首页</span>
+                        </a>
+                    </li>
+                    <!-- /主页 -->
+                    <li>
+                        <a target="_self" href="http://localhost:8080/github" class="auto">
+                                <span class="nav-icon"><i data-feather="github">
+                                </i></span><span>仓库</span></a>
+                    </li>
+                    <li><a target="_self" href="http://localhost:8080/message" class="auto"><span class="nav-icon"><i
+                            data-feather="at-sign"></i></span><span>留言</span></a></li>
+                    <li><a target="_self" href="http://localhost:8080/archive" class="auto"><span class="nav-icon"><i
+                            data-feather="archive"></i></span><span>归档</span></a></li>
+                    <li class="line dk"></li>
+
+                    <li>
+                        <!--Components-->
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span>组成</span>
+                    </li>
+                    <!--分类category-->
+                    <li>
+                        <a class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fontello icon-fw fontello-angle-right text"></i>
+                    <i class="fontello icon-fw fontello-angle-down text-active"></i>
+                  </span>
+                            <!--                  <i class="glyphicon glyphicon-th"></i>-->
+                            <span class="nav-icon"><i data-feather="grid"></i></span>
+
+                            <span>分类</span>
+                        </a>
+                        <ul class="nav nav-sub dk">
+                            <li class="nav-sub-header">
+                                <a>
+                                    <span>分类</span>
+                                </a>
+                            </li>
+                            <!--循环输出分类-->
+
+                            <li th:each="map :${list.map}">
+                                <a href="#">
+                                    <b class="badge pull-right" th:text="${map.value}"></b>
+                                    <span th:text="${map.key}"></span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!--友情链接-->
+                    <li><a target="_self" href="http://localhost:8080/book" class="auto"><span class="nav-icon"><i
+                            data-feather="at-sign"></i></span><span>友情链接</span></a></li>
+                    <!--<li>
+                        <a class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fontello icon-fw fontello-angle-right text"></i>
+                    <i class="fontello icon-fw fontello-angle-down text-active"></i>
+                  </span>
+                            <span class="nav-icon"><i data-feather="user"></i></span>
+                            <span>友链</span>
+                        </a>
+                        <ul class="nav nav-sub dk">
+                            <li class="nav-sub-header">
+                                <a data-no-instant="">
+                                    <span>友链</span>
+                                </a>
+                            </li>
+                            &lt;!&ndash;使用links插件，输出全站友链&ndash;&gt;
+                            <li data-original-title="一个神秘的人" data-toggle="tooltip" data-placement="top"><a
+                                    href="javascript:;" target="_blank"><span>洛 苏り</span></a></li>
+                        </ul>
+                    </li>-->
+                </ul>
+            </nav>
+            <!-- nav -->
+        </div>
+        <!--end of .navi-wrap-->
+        <!--left_footer-->
+        <div id="left_footer" class="footer wrapper-xs text-center nav-xs lt">
+            <div class="col-xs-4 no-padder">
+                <a target="_blank" class="tinav" href="http://localhost:8080/login" title="" data-toggle="tooltip"
+                   data-placement="top" data-original-title="后台管理">
+                    <span class="left-bottom-icons block"><i data-feather="settings"></i></span>
+                    <small class="text-muted">管理</small>
+                </a>
+            </div>
+            <div class="col-xs-4 no-padder">
+                <a target="_blank" class="tinav" href="#" title="" data-toggle="tooltip"
+                   data-placement="top" data-original-title="文章RSS地址">
+                    <span class="left-bottom-icons block"><i data-feather="rss"></i></span>
+                    <small class="text-muted">文章</small>
+                </a>
+            </div>
+            <div class="col-xs-4 no-padder">
+                <a target="_blank" href="#" title="" data-toggle="tooltip" data-placement="top"
+                   data-original-title="评论RSS地址">
+                    <span class="left-bottom-icons block"><i data-feather="message-square"></i></span>
+                    <small class="text-muted">评论</small>
+                </a>
+            </div>
+        </div>
+    </div><!--.aside-wrap-->
+</aside>

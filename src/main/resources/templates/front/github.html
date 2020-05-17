@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title>基于SpringBoot个人爱好分享与交流</title>
+</head>
+
+
+<body id="body" class="fix-padding">
+
+<div id="alllayout" class="app app-aside-fix container app-header-fixed ">
+    <div th:replace="front/layout/header"></div>
+
+    <!--left-->
+    <div th:replace="front/layout/left"></div>
+    <!--/left-->
+
+    <!-- content -->
+    <div id="content" class="app-content">
+        <!--loading animate-->
+        <div id="loading" class="butterbar active hide">
+            <span class="bar"></span>
+        </div>    <!-- / aside -->
+
+        <!-- <div id="content" class="app-content"> -->
+        <a class="off-screen-toggle hide"></a>
+        <main class="app-content-body animated fadeIn">
+            <div class="hbox hbox-auto-xs hbox-auto-sm">
+                <!--文章-->
+                <div class="col center-part">
+                    <div class="bg-light lter wrapper-md">
+                        <h1 class="entry-title m-n font-thin text-black l-h"><span class="title-icons"><i
+                                data-feather="github"></i></span>项目展示</h1>
+                    </div>
+                    <div class="wrapper-md" id="post-panel">
+                        <!--博客文章样式 begin with .blog-post-->
+                        <div id="postpage" class="blog-post">
+                            <article class="single-post panel">
+                                <!--文章页面的头图-->
+                                <!--文章内容-->
+                                <div id="post-content" class="wrapper-lg">
+                                    <div class="l-h-2x row">
+                                        <small class="text-muted letterspacing github_tips"></small>
+                                        <!--github--->
+                                        <div class="github_page">
+                                            <nav class="loading-nav text-center m-t-lg m-b-lg">
+                                                <p class="infinite-scroll-request"><i class="animate-spin fontello
+                      fontello-refresh"></i>Loading……</p>
+                                            </nav>
+                                            <nav class="error-nav hide text-center m-t-lg m-b-lg">
+                                                <p class="infinite-scroll-request"><i class="glyphicon
+                            glyphicon-refresh"></i>加载失败！尝试重新加载</p>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                    </div>
+                </div>
+                <!--文章右侧边栏开始-->
+                <div th:replace="front/layout/right"></div>
+                <!--文章右侧边栏结束-->
+            </div>
+
+            <script type="text/javascript">
+                var githubItemTemple = '<div class="col-xs-12 col-sm-6">' +
+                    '<div class="panel b-light {BG_COLOR}">\n' +
+                    '        <div class="panel-body"><div class="github_language">{PROJECT_LANGUAGE}</div>' +
+                    '          \n' +
+                    '          <div class="clear">\n' +
+                    '            <span class="text-ellipsis font-thin h3">{REPO_NAME}</span>\n' +
+                    '            <small class="block m-sm"><i class="iconfont icon-star m-r-xs"></i>{REPO_STARS} stars / <i class="iconfont icon-fork"></i> {REPO_FORKS} forks</small>\n' +
+                    '<small class="text-ellipsis block text-muted">{REPO_DESC}</small>' +
+                    '<a target="_blank" href="{REPO_URL}" class="m-sm btn btn-rounded btn-sm lter btn-{BUTTON_COLOR}"><i class="glyphicon glyphicon-hand-up"></i>访问</a>' +
+                    '          </div>\n' +
+                    '        </div>\n' +
+                    '      </div>' +
+                    '</div>';
+
+
+                var open = function () {
+
+                    var handleGithub = function () {
+                        var repoContainer = $('.github_page');
+                        var loadingContainer = repoContainer.find(".loading-nav");
+                        var errorContainer = repoContainer.find(".error-nav");
+                        var countContainer = $(".github_tips");
+                        var colors = ["light", "info", "dark", "success", "black", "warning", "primary", "danger"];
+                        $.get("https://api.github.com/users/Lu001/repos", function (result) {
+                            if (result) {
+                                loadingContainer.addClass("hide");
+                                var ul = $("<div class='raw'><div class='col-md-12'><div class=\"row row-sm text-center " +
+                                    "github_contain" +
+                                    "\"></div></div></div>");
+                                repoContainer.append(ul);
+                                var contentContainer = $(".github_contain");
+                                for (var i in result) {
+                                    var repo = result[i];
+                                    repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
+                                    if (repo.language == null) {
+                                        repo.language = "未知";
+                                    }
+                                    //匹配替换
+                                    var item = githubItemTemple.replace("{REPO_NAME}", repo.name)
+                                        .replace("{REPO_URL}", repo.html_url)
+                                        .replace("{REPO_STARS}", repo.stargazers_count)
+                                        .replace("{REPO_FORKS}", repo.forks_count)
+                                        .replace("{REPO_DESC}", repo.description)
+                                        .replace("{BG_COLOR}", "bg-" + colors[i % 8])
+                                        .replace("{BUTTON_COLOR}", colors[(i) % 8])
+                                        .replace("{PROJECT_LANGUAGE}", repo.language);
+                                    contentContainer.append(item);
+                                }
+                            } else {
+                                errorContainer.removeClass("hide");
+                            }
+                        });
+                    };
+
+                    return {
+                        init: function () {
+                            handleGithub();
+                        }
+                    }
+                };
+
+                $(open().init);
+
+            </script>
+        </main>
+    </div>
+    <!-- /content -->
+
+
+    <!-- footer -->
+    <div th:replace="front/layout/footer"></div>
+
+</div>
+
+
+</body>
+
+
+</html>
+
+
+
+

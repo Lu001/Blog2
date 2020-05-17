@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title>基于SpringBoot个人爱好分享与交流</title>
+</head>
+
+
+<body id="body" class="fix-padding">
+
+<div id="alllayout" class="app app-aside-fix container app-header-fixed ">
+    <div th:replace="front/layout/header"></div>
+
+    <!--left-->
+    <div th:replace="front/layout/left"></div>
+    <!--/left-->
+
+    <!--content -->
+    <div id="content" class="app-content">
+        <!--loading animate-->
+        <div id="loading" class="butterbar active hide">
+            <span class="bar"></span>
+        </div><!-- / aside -->
+
+        <!-- <div id="content" class="app-content"> -->
+        <a class="off-screen-toggle hide"></a>
+        <main class="app-content-body animated fadeIn">
+            <div class="hbox hbox-auto-xs hbox-auto-sm">
+                <div class="col center-part">
+                    <header class="bg-light lter wrapper-md">
+                        <h1 class="entry-title m-n font-thin text-black l-h">文章归档</h1>
+                        <small class="text-muted letterspacing indexWords">好! 目前共计 31 篇日志。 继续努力。</small>
+                    </header>
+
+                    <div class="wrapper-md">
+                        <ul class="timeline" th:each="c : ${list.archives}">
+                            <li class="tl-header">
+                                <h2 class="btn btn-sm btn-dark btn-rounded m-t-none">[[${c.date}]]</h2>
+                            </li>
+                            <div class="tl-body" >
+                                <li class="tl-item" th:each="a : ${c.articles}">
+                                    <div class="tl-wrap b-dark" ><span class="tl-date">[[${a.publishTime}]]</span>
+                                        <h3 class="tl-content panel padder h5 l-h bg-dark"><span
+                                                class="arrow arrow-dark left pull-up" aria-hidden="true"></span><a
+                                                th:href="'/article/' + ${a.id}" th:text="${a.title}" class="text-lt"></a></h3></div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+                <!--首页右侧栏-->
+                <div th:replace="front/layout/right"></div>
+            </div>
+
+        </main>
+
+    </div>
+    <!--/content -->
+
+    <!-- footer -->
+    <div th:replace="front/layout/footer"></div>
+
+</div>
+
+
+</body>
+
+
+</html>
+

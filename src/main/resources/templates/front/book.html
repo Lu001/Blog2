@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title>基于SpringBoot个人爱好分享与交流</title>
+</head>
+<body id="body" class="fix-padding">
+<div id="alllayout" class="app app-aside-fix container app-header-fixed ">
+    <div th:replace="front/layout/header"></div>
+    <link rel="stylesheet" data-th-href="@{/front/book/style.css}" type="text/css">
+    <!--left-->
+    <div th:replace="front/layout/left"></div>
+    <!--/left-->
+    <main  id=app class="app-content-body animated fadeIn">
+        <div class="hbox hbox-auto-xs hbox-auto-sm">
+            <!--content -->
+            <div class="col center-part book">
+                <div style="padding-left: 250px;padding-top: 100px">
+                    <mochi-box th:each="link :${list.links}" shiba="random">
+                        <blockquote>
+                            <p>
+                                [[${link.description}]]
+                            </p>
+                        </blockquote>
+                        <blockquote>
+                            链接显示
+                            <small>[[${link.url}]] <cite title="Source Title">@友链</cite></small>
+                        </blockquote>
+                        <blockquote class="pull-right">
+
+                        </blockquote>
+                    </mochi-box>
+                </div>
+
+            </div>
+            <div th:replace="front/layout/right"></div>
+        </div>
+        <!--/content -->
+    </main>
+    <!-- footer -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+    <script th:src="@{/front/book/script.js}"></script>
+    <div th:replace="front/layout/footer"></div>
+</div>
+</body>
+</html>
